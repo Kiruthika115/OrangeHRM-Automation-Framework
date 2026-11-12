@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="OrangeHRM Suite">
+
+    <listeners>
+        <listener class-name="com.orangehrmproj.reports.TestListener"/>
+    </listeners>
+
+    <test name="OrangeHRM Regression">
+        <classes>
+            <class name="com.orangehrmproj.tests.LoginTest"/>
+            <class name="com.orangehrmproj.tests.LoginDataTest"/>
+            <class name="com.orangehrmproj.tests.PIMTest"/>
+            <class name="com.orangehrmproj.tests.PIMCrudTest"/>
+            <class name="com.orangehrmproj.tests.ApiVsUiTest"/>
+        </classes>
+    </test>
+
+</suite>
