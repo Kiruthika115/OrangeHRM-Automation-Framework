@@ -12,7 +12,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BaseClass {
 
-    protected WebDriver driver;
+	public WebDriver driver;
 
     @BeforeMethod
     public void setUp() {

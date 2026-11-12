@@ -1,7 +1,7 @@
-
 package com.orangehrmproj.reports;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
@@ -11,20 +11,34 @@ import com.orangehrmproj.utilities.ScreenshotUtils;
 public class TestListener implements ITestListener {
 
     @Override
-    public void onTestStart(ITestResult result) {
+    public void onStart(ITestContext context) {
+        if (ExtentReportManager.extent == null) {
+            ExtentReportManager.initReport();
+        }
+    }
 
+    @Override
+    public void onFinish(ITestContext context) {
+        ExtentReportManager.flushReport();
+    }
+
+    @Override
+    public void onTestStart(ITestResult result) {
         ExtentReportManager.createTest(
                 result.getMethod().getMethodName());
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-
         ExtentReportManager.test.pass("Test Passed");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
+
+        // print the reason in the console so a failure is never hidden
+        System.out.println("FAILED: " + result.getName()
+                + " -> " + result.getThrowable());
 
         ExtentReportManager.test.fail(result.getThrowable());
 
@@ -55,7 +69,6 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestSkipped(ITestResult result) {
-
         ExtentReportManager.test.skip("Test Skipped");
     }
 }
